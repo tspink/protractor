@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   ip-endpoint.h
  * Author: s0457958
  *
@@ -26,11 +26,12 @@ namespace protractor
 			class IPEndPoint : public EndPoint
 			{
 			public:
-				IPEndPoint(IPAddress& addr, int port) : EndPoint(AddressFamily::IPv4), _addr(addr), _port(port) { }
-				
-				virtual std::sockaddr* create_sockaddr(std::socklen_t& len) override;
-				virtual void free_sockaddr(std::sockaddr*) override;
-				
+				IPEndPoint(IPAddress addr, int port);
+				~IPEndPoint();
+
+				virtual struct sockaddr *create_sockaddr(socklen_t& len) override;
+				virtual void free_sockaddr(struct sockaddr *sa) override;
+
 			private:
 				IPAddress _addr;
 				int _port;

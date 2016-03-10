@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   socket-fd.h
  * Author: s0457958
  *
@@ -33,8 +33,8 @@ namespace protractor
 				void listen(int max_pending);
 
 			private:
-				Socket(int fd);
-				
+				Socket(int fd, AddressFamily::AddressFamily family, SocketType::SocketType type, ProtocolType::ProtocolType protocol);
+
 				AddressFamily::AddressFamily _family;
 				SocketType::SocketType _type;
 				ProtocolType::ProtocolType _protocol;

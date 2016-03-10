@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   endpoint.h
  * Author: s0457958
  *
@@ -16,10 +16,7 @@
 
 #include <fd/net/types.h>
 
-namespace std
-{
 #include <sys/socket.h>
-}
 
 namespace protractor
 {
@@ -30,13 +27,14 @@ namespace protractor
 			class EndPoint
 			{
 			public:
-				EndPoint(AddressFamily::AddressFamily family) : _family(family) { }
-				
+				EndPoint(AddressFamily::AddressFamily family);
+				virtual ~EndPoint();
+
 				AddressFamily::AddressFamily family() const { return _family; }
-				
-				virtual std::sockaddr *create_sockaddr(std::socklen_t& len) = 0;
-				virtual void free_sockaddr(std::sockaddr *) = 0;
-				
+
+				virtual struct sockaddr *create_sockaddr(socklen_t& len) = 0;
+				virtual void free_sockaddr(struct sockaddr *sa) = 0;
+
 			private:
 				AddressFamily::AddressFamily _family;
 			};

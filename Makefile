@@ -5,14 +5,14 @@ out-dir := $(top-dir)/out
 
 out := protractor
 
-obj := 
+obj :=
 -include $(src-dir)/Makefile
 
 real-obj := $(patsubst %,$(src-dir)/%,$(obj))
 real-out := $(out-dir)/$(out)
 
 ldflags  :=
-cxxflags := -Wall -g -I$(inc-dir)
+cxxflags := -Wall -g -I$(inc-dir) -std=gnu++14
 
 all: $(real-out)
 
@@ -21,10 +21,12 @@ clean:
 	rm -f $(real-obj)
 
 $(real-out): $(out-dir) $(real-obj)
-	g++ -o $@ $(ldflags) $(real-obj)
+	@echo "  LD    $(notdir $@)"
+	@g++ -o $@ $(ldflags) $(real-obj)
 
 %.o: %.cpp
-	g++ -c -o $@ $(cxxflags) $<
+	@echo "  C++   $(notdir $@)"
+	@g++ -c -o $@ $(cxxflags) $<
 
 $(out-dir):
 	mkdir $@
