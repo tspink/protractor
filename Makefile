@@ -16,6 +16,10 @@ cxxflags := -Wall -g -I$(inc-dir)
 
 all: $(real-out)
 
+clean:
+	rm -f $(real-out)
+	rm -f $(real-obj)
+
 $(real-out): $(out-dir) $(real-obj)
 	g++ -o $@ $(ldflags) $(real-obj)
 
