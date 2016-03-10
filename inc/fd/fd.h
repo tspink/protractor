@@ -12,8 +12,10 @@ namespace protractor
 			~FileDescriptor();
 			void close();
 
+			int fd() const { return _fd; }
+
 		protected:
-			FileDescriptor(int fd);		
+			FileDescriptor(int fd);
 			int _fd;
 		};
 	}

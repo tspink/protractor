@@ -12,11 +12,17 @@ namespace protractor
 	{
 	public:
 		Exception(std::string message) : _message(message) { }
-		
+
 		std::string message() const { return _message; }
-		
+
 	private:
 		std::string _message;
+	};
+
+	class NotImplementedException : public Exception
+	{
+	public:
+		NotImplementedException() : Exception("not implemented") { }
 	};
 }
 

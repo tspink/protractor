@@ -21,7 +21,9 @@ struct sockaddr *IPEndPoint::create_sockaddr(socklen_t& len)
 {
 	struct sockaddr_in *sa = (struct sockaddr_in *)malloc(sizeof(struct sockaddr_in));
 
-	//sa->
+	sa->sin_family = AF_INET;
+	sa->sin_port = htons(_port);
+	sa->sin_addr.s_addr = htonl(_addr.address());
 
 	return (struct sockaddr *)sa;
 }
