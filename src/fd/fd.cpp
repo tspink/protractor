@@ -1,3 +1,9 @@
+/**
+ * src/fd/fd.cpp
+ *
+ * Protractor :: Copyright (C) University of Edinburgh 2016
+ * All Rights Reserved
+ */
 #include <fd/fd.h>
 #include <unistd.h>
 

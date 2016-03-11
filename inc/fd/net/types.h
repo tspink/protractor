@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * File:   types.h
- * Author: s0457958
+/**
+ * inc/fd/net/types.h
  *
- * Created on 10 March 2016, 16:49
+ * Protractor :: Copyright (C) University of Edinburgh 2016
+ * All Rights Reserved
  */
-
 #ifndef TYPES_H
 #define TYPES_H
 

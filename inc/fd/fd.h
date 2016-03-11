@@ -1,3 +1,9 @@
+/**
+ * inc/fd/fd.h
+ *
+ * Protractor :: Copyright (C) University of Edinburgh 2016
+ * All Rights Reserved
+ */
 #ifndef FD_H
 #define FD_H
 

@@ -1,3 +1,9 @@
+/**
+ * inc/fd/epoll.h
+ *
+ * Protractor :: Copyright (C) University of Edinburgh 2016
+ * All Rights Reserved
+ */
 #ifndef EPOLL_H
 #define EPOLL_H
 

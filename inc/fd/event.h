@@ -1,3 +1,9 @@
+/**
+ * inc/fd/event.h
+ *
+ * Protractor :: Copyright (C) University of Edinburgh 2016
+ * All Rights Reserved
+ */
 #ifndef EVENT_H
 #define EVENT_H
 

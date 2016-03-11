@@ -1,3 +1,9 @@
+/**
+ * inc/server.h
+ *
+ * Protractor :: Copyright (C) University of Edinburgh 2016
+ * All Rights Reserved
+ */
 #ifndef SERVER_H
 #define SERVER_H
 

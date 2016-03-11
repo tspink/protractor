@@ -1,3 +1,9 @@
+/**
+ * inc/fd/net/ip-address.h
+ *
+ * Protractor :: Copyright (C) University of Edinburgh 2016
+ * All Rights Reserved
+ */
 #ifndef IP_ADDRESS_H
 #define IP_ADDRESS_H
 

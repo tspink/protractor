@@ -1,3 +1,9 @@
+/**
+ * inc/protractor.h
+ *
+ * Protractor :: Copyright (C) University of Edinburgh 2016
+ * All Rights Reserved
+ */
 #ifndef __PROTRACTOR_H__
 #define __PROTRACTOR_H__
 

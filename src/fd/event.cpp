@@ -1,3 +1,9 @@
+/**
+ * src/fd/event.cpp
+ *
+ * Protractor :: Copyright (C) University of Edinburgh 2016
+ * All Rights Reserved
+ */
 #include <fd/event.h>
 #include <sys/eventfd.h>
 #include <unistd.h>

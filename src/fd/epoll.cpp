@@ -1,3 +1,9 @@
+/**
+ * src/fd/epoll.cpp
+ *
+ * Protractor :: Copyright (C) University of Edinburgh 2016
+ * All Rights Reserved
+ */
 #include <fd/epoll.h>
 #include <sys/epoll.h>
 

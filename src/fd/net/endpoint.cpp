@@ -1,3 +1,9 @@
+/**
+ * src/fd/net/endpoint.cpp
+ *
+ * Protractor :: Copyright (C) University of Edinburgh 2016
+ * All Rights Reserved
+ */
 #include <fd/net/ip-endpoint.h>
 #include <malloc.h>
 #include <netinet/in.h>

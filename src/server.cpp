@@ -1,3 +1,9 @@
+/**
+ * src/server.cpp
+ *
+ * Protractor :: Copyright (C) University of Edinburgh 2016
+ * All Rights Reserved
+ */
 #include <server.h>
 #include <fd/epoll.h>
 #include <fd/net/socket.h>
@@ -108,7 +114,13 @@ bool ProtractorServer::handle_socket(fd::net::Socket *skt, bool read, bool write
 		if (rc == 0)
 			return false;
 
-		printf("read %lu bytes\n", rc);
+		printf("read %lu bytes:\n", rc);
+
+		char *p = buffer;
+		while (rc-- > 0) {
+			printf("%c", *p++);
+		}
+		printf("\n");
 	}
 
 	return true;

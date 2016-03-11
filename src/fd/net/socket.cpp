@@ -1,5 +1,10 @@
+/**
+ * src/net/fd/socket.cpp
+ *
+ * Protractor :: Copyright (C) University of Edinburgh 2016
+ * All Rights Reserved
+ */
 #include <fd/net/socket.h>
-
 #include <sys/socket.h>
 
 using namespace protractor;
@@ -64,6 +69,6 @@ Socket* Socket::accept()
 
 	const EndPoint *rep = EndPoint::from_sockaddr(sa);
 	free(sa);
-	
+
 	return new Socket(new_fd, rep->family(), _type, _protocol, rep);
 }

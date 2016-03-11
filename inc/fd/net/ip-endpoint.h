@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * File:   ip-endpoint.h
- * Author: s0457958
+/**
+ * inc/net/fd/ip-endpoint.h
  *
- * Created on 10 March 2016, 16:40
+ * Protractor :: Copyright (C) University of Edinburgh 2016
+ * All Rights Reserved
  */
-
 #ifndef IP_ENDPOINT_H
 #define IP_ENDPOINT_H
 
