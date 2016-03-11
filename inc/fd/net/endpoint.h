@@ -35,6 +35,8 @@ namespace protractor
 				virtual struct sockaddr *create_sockaddr(socklen_t& len) = 0;
 				virtual void free_sockaddr(struct sockaddr *sa) = 0;
 
+				static const EndPoint *from_sockaddr(const struct sockaddr *sa);
+
 			private:
 				AddressFamily::AddressFamily _family;
 			};

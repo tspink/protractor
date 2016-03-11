@@ -6,11 +6,12 @@ using namespace protractor;
 using namespace protractor::fd;
 using namespace protractor::fd::net;
 
-Socket::Socket(int fd, AddressFamily::AddressFamily family, SocketType::SocketType type, ProtocolType::ProtocolType protocol)
+Socket::Socket(int fd, AddressFamily::AddressFamily family, SocketType::SocketType type, ProtocolType::ProtocolType protocol, const EndPoint *rep)
 	: FileDescriptor(fd),
 		_family(family),
 		_type(type),
-		_protocol(protocol)
+		_protocol(protocol),
+		_remote_endpoint(rep)
 {
 
 }
@@ -21,7 +22,7 @@ Socket *Socket::create(AddressFamily::AddressFamily family, SocketType::SocketTy
 	if (fd < 0)
 		return NULL;
 
-	return new Socket(fd, family, type, protocol);
+	return new Socket(fd, family, type, protocol, NULL);
 }
 
 void Socket::bind(EndPoint& ep)
@@ -48,4 +49,21 @@ void Socket::listen(int max_pending)
 	if (::listen(_fd, max_pending) < 0) {
 		throw Exception("unable to listen on socket");
 	}
+}
+
+Socket* Socket::accept()
+{
+	struct sockaddr *sa = (struct sockaddr *)malloc(256);
+	socklen_t sa_len = 256;
+
+	int new_fd = ::accept(_fd, sa, &sa_len);
+	if (new_fd < 0) {
+		free(sa);
+		return NULL;
+	}
+
+	const EndPoint *rep = EndPoint::from_sockaddr(sa);
+	free(sa);
+	
+	return new Socket(new_fd, rep->family(), _type, _protocol, rep);
 }

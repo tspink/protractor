@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* 
+/*
  * File:   types.h
  * Author: s0457958
  *
@@ -27,9 +27,10 @@ namespace protractor
 					Unix = 1,
 					IPv4 = 2,
 					IPv6 = 10,
+					None = 255
 				};
 			}
-			
+
 			namespace SocketType
 			{
 				enum SocketType
@@ -39,7 +40,7 @@ namespace protractor
 					Raw = 3,
 				};
 			}
-			
+
 			namespace ProtocolType
 			{
 				enum ProtocolType

@@ -31,13 +31,17 @@ namespace protractor
 
 				void bind(EndPoint& ep);
 				void listen(int max_pending);
+				Socket *accept();
+
+				const EndPoint *remote_endpoint() const { return _remote_endpoint; }
 
 			private:
-				Socket(int fd, AddressFamily::AddressFamily family, SocketType::SocketType type, ProtocolType::ProtocolType protocol);
+				Socket(int fd, AddressFamily::AddressFamily family, SocketType::SocketType type, ProtocolType::ProtocolType protocol, const EndPoint *rep);
 
 				AddressFamily::AddressFamily _family;
 				SocketType::SocketType _type;
 				ProtocolType::ProtocolType _protocol;
+				const EndPoint *_remote_endpoint;
 			};
 		}
 	}

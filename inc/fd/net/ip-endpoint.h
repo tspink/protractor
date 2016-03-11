@@ -26,14 +26,17 @@ namespace protractor
 			class IPEndPoint : public EndPoint
 			{
 			public:
-				IPEndPoint(IPAddress addr, int port);
+				IPEndPoint(const IPAddress& addr, int port);
 				~IPEndPoint();
+
+				const IPAddress& address() const { return _addr; }
+				int port() const { return _port; }
 
 				virtual struct sockaddr *create_sockaddr(socklen_t& len) override;
 				virtual void free_sockaddr(struct sockaddr *sa) override;
 
 			private:
-				IPAddress _addr;
+				const IPAddress _addr;
 				int _port;
 			};
 		}

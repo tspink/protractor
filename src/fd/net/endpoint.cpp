@@ -6,9 +6,21 @@ using namespace protractor::fd::net;
 
 EndPoint::EndPoint(AddressFamily::AddressFamily af) : _family(af) { }
 
-EndPoint::~EndPoint() { }
+EndPoint::~EndPoint() {
+}
 
-IPEndPoint::IPEndPoint(IPAddress addr, int port) : EndPoint(AddressFamily::IPv4), _addr(addr), _port(port)
+const EndPoint *EndPoint::from_sockaddr(const struct sockaddr *sa)
+{
+	if (sa->sa_family == AF_INET) {
+		const struct sockaddr_in *sa_in = (const struct sockaddr_in *)sa;
+		return new IPEndPoint(IPAddress(ntohl(sa_in->sin_addr.s_addr)), ntohs(sa_in->sin_port));
+	} else {
+		return NULL;
+	}
+}
+
+
+IPEndPoint::IPEndPoint(const IPAddress& addr, int port) : EndPoint(AddressFamily::IPv4), _addr(addr), _port(port)
 {
 
 }

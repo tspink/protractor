@@ -14,6 +14,9 @@ namespace protractor
 
 			int fd() const { return _fd; }
 
+			int read(void *buffer, size_t size);
+			int write(void *buffer, size_t size);
+
 		protected:
 			FileDescriptor(int fd);
 			int _fd;

@@ -18,7 +18,7 @@ Epoll::Epoll(int fd) : FileDescriptor(fd)
 
 }
 
-void Epoll::add(FileDescriptor* fd, EpollEvent::EpollEvent events)
+void Epoll::add(FileDescriptor* fd, EpollEventType::EpollEventType events)
 {
 	struct epoll_event evt;
 	evt.data.ptr = fd;
@@ -30,10 +30,11 @@ void Epoll::add(FileDescriptor* fd, EpollEvent::EpollEvent events)
 
 void Epoll::remove(FileDescriptor* fd)
 {
-	throw NotImplementedException();
+	if (epoll_ctl(_fd, EPOLL_CTL_DEL, fd->fd(), NULL) < 0)
+		throw Exception("unable to remove file descriptor");
 }
 
-bool Epoll::wait(std::list<FileDescriptor *>& events, int max_events, int timeout)
+bool Epoll::wait(std::list<EpollEvent>& events, int max_events, int timeout)
 {
 	struct epoll_event evts[max_events];
 
@@ -45,7 +46,10 @@ bool Epoll::wait(std::list<FileDescriptor *>& events, int max_events, int timeou
 	}
 
 	for (int i = 0; i < count; i++) {
-		events.push_back((FileDescriptor *)evts[i].data.ptr);
+		events.push_back({
+			(FileDescriptor *)evts[i].data.ptr,
+			(EpollEventType::EpollEventType)evts[i].events
+		});
 	}
 
 	return true;
