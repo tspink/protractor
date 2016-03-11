@@ -11,11 +11,20 @@
 using namespace protractor;
 using namespace protractor::fd;
 
+/**
+ * Creates an new eventfd wrapper, for the given fd.
+ * @param fd
+ */
 Event::Event(int fd) : FileDescriptor(fd)
 {
 
 }
 
+/**
+ * Performs the creation of the eventfd wrapper.
+ * @return An Event object that represents a new eventfd, or NULL if an error
+ * occurred.
+ */
 Event *Event::create()
 {
 	int fd = eventfd(0, 0);
@@ -25,6 +34,9 @@ Event *Event::create()
 	return new Event(fd);
 }
 
+/**
+ * Invokes the eventfd.
+ */
 void Event::invoke()
 {
 	uint64_t v = 1;
