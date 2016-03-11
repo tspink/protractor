@@ -27,7 +27,7 @@ namespace protractor
 		fd::Event *stop_event;
 		std::list<fd::net::Socket *> clients;
 
-		void handle_socket(fd::net::Socket *skt, bool read, bool write);
+		bool handle_socket(fd::net::Socket *skt, bool read, bool write);
 	};
 }
 

@@ -56,7 +56,7 @@ void ProtractorServer::run()
 				Socket *client_socket = server_socket->accept();
 				if (client_socket) {
 					try {
-						ep->add(client_socket, (EpollEventType::EpollEventType)(EpollEventType::IN | EpollEventType::OUT | EpollEventType::HUP | EpollEventType::ERR));
+						ep->add(client_socket, (EpollEventType::EpollEventType)(EpollEventType::IN | EpollEventType::HUP | EpollEventType::ERR));
 					} catch (Exception& ex) {
 						delete client_socket;
 					}
@@ -65,14 +65,20 @@ void ProtractorServer::run()
 					break;
 				}
 			} else {
+				bool socket_error;
+
 				if (evt.hup() || evt.err()) {
+					socket_error = true;
+				} else {
+					socket_error = !handle_socket((Socket *)evt.fd, evt.in(), evt.out());
+				}
+
+				if (socket_error) {
 					try {
 						ep->remove(evt.fd);
 					} catch (Exception& ex) { }
 
 					delete evt.fd;
-				} else {
-					handle_socket((Socket *)evt.fd, evt.in(), evt.out());
 				}
 			}
 		}
@@ -89,14 +95,21 @@ void ProtractorServer::stop()
 	stop_event->invoke();
 }
 
-void ProtractorServer::handle_socket(fd::net::Socket *skt, bool read, bool write)
+bool ProtractorServer::handle_socket(fd::net::Socket *skt, bool read, bool write)
 {
 	const IPEndPoint *ep = (const IPEndPoint *)skt->remote_endpoint();
 
 	printf("handling socket from %s:%d r=%d, w=%d\n", ep->address().to_string().c_str(), ep->port(), read, write);
 
-	char buffer[1024];
-	int rc = skt->read(buffer, 1024);
+	if (read) {
+		char buffer[1024];
+		int rc = skt->read(buffer, 1024);
 
-	printf("read %lu bytes\n", rc);
+		if (rc == 0)
+			return false;
+
+		printf("read %lu bytes\n", rc);
+	}
+
+	return true;
 }
