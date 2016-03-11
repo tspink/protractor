@@ -9,6 +9,7 @@ obj :=
 -include $(src-dir)/Makefile
 
 real-obj := $(patsubst %,$(src-dir)/%,$(obj))
+real-dep := $(patsubst %.o,%.d,$(real-obj))
 real-out := $(out-dir)/$(out)
 
 ldflags  :=
@@ -20,7 +21,7 @@ clean:
 	rm -f $(real-out)
 	rm -f $(real-obj)
 
-$(real-out): $(out-dir) $(real-obj)
+$(real-out): $(out-dir) $(real-dep) $(real-obj)
 	@echo "  LD    $(notdir $@)"
 	@g++ -o $@ $(ldflags) $(real-obj)
 
@@ -28,5 +29,10 @@ $(real-out): $(out-dir) $(real-obj)
 	@echo "  C++   $(notdir $@)"
 	@g++ -c -o $@ $(cxxflags) $<
 
+%.d: %.cpp
+	@g++ -M -MT $(@:.d=.o) -o $@ $(cxxflags) $<
+
 $(out-dir):
 	mkdir $@
+
+-include $(real-dep)
